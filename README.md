@@ -1,5 +1,7 @@
 # startup-page
 
+![preview](assets/preview.png)
+
 `startup-page` is a [Spicetify](https://spicetify.app/) extension that does exactly what it says.  
 Whenever you start Spotify it will go to your selected startup page instead of the home page.
 
