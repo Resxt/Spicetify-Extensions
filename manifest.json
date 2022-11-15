@@ -5,5 +5,12 @@
       "preview": "startup-page/assets/preview.png",
       "main": "startup-page/dist/startup-page.js",
       "readme": "startup-page/README.md"
+    },
+    {
+      "name": "Skip song part",
+      "description": "Spicetify extension to skip any part you don't want to hear in any song",
+      "preview": "skip-song-part/assets/preview.png",
+      "main": "skip-song-part/dist/skip-song-part.js",
+      "readme": "skip-song-part/README.md"
     }
 ]
