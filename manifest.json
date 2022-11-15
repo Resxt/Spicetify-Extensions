@@ -2,8 +2,8 @@
     {
       "name": "Startup page",
       "description": "Spicetify extension to change the startup page",
-      "preview": "assets/preview.png",
-      "main": "dist/startup-page.js",
-      "readme": "README.md"
+      "preview": "startup-page/assets/preview.png",
+      "main": "startup-page/dist/startup-page.js",
+      "readme": "startup-page/README.md"
     }
 ]
