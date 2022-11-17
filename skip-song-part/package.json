@@ -1,6 +1,6 @@
 {
   "name": "skip-song-part",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "build": "spicetify-creator",
@@ -12,10 +12,5 @@
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.9",
     "spicetify-creator": "^1.0.11"
-  },
-  "dependencies": {
-    "arrive": "^2.4.1",
-    "spcr-settings": "^1.1.0",
-    "umbrellajs": "^3.3.1"
   }
 }

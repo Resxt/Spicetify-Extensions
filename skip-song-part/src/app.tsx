@@ -1,4 +1,6 @@
-const localStorageKey = "skip-song-part";
+import initMenu from "./menu";
+import { getStoredData, getStoredDataRaw, saveStoredData, msToReadableTime, sleep, clearStoredData, getArtistNameFromTrack } from "./utils";
+
 const skipSegmentDefault = -1;
 
 let skipStartSegment = skipSegmentDefault;
@@ -9,40 +11,40 @@ async function main() {
     await new Promise(resolve => setTimeout(resolve, 100));
   }
 
-  Spicetify.LocalStorage.remove(localStorageKey);
+  initMenu();
 
-  if (Spicetify.LocalStorage.get(localStorageKey) === null) {
-    Spicetify.LocalStorage.set(localStorageKey, JSON.stringify({}));
+  if (getStoredDataRaw() === null) {
+    clearStoredData();
   }
 
-  Spicetify.Mousetrap.bind('s', addSegmentPart);
+  Spicetify.Mousetrap.bind('alt+s', addSegmentPart);
 
   monitorTrackChange();
 }
 
 function monitorTrackChange() {
   Spicetify.Player.addEventListener("songchange", () => {
-		const data = Spicetify.Player.data || Spicetify.Queue;
+    const data = Spicetify.Player.data || Spicetify.Queue;
 
-		if (!data) return;
+    if (!data) return;
 
     clearSkipPartSegment();
-		
-    const parsedStorage: SkipSongPartStorage = JSON.parse(Spicetify.LocalStorage.get(localStorageKey)!);
-    
+
+    const parsedStorage: SkipSongPartStorage = getStoredData();
+
     // If the current track is found in the local storage then monitor the track to skip the segments
-    if (parsedStorage[data.track?.uid!] !== undefined) {
-      monitorSegmentSkip(data.track?.uid!, parsedStorage[data.track?.uid!]);
+    if (parsedStorage[data.track?.uri!] !== undefined) {
+      monitorSegmentSkip(data.track?.uri!, parsedStorage[data.track?.uri!].segments);
     }
-	});
+  });
 }
 
-async function monitorSegmentSkip(trackUID: string, skips: SongSegments) {
+async function monitorSegmentSkip(trackURI: string, skips: SongSegments) {
   while (Spicetify.Player.isPlaying) {
     const data = Spicetify.Player.data || Spicetify.Queue;
 
     // If we're not listening to the monitored song anymore then stop monitoring for segment skips
-    if (data.track?.uid! !== trackUID) {
+    if (data.track?.uri! !== trackURI) {
       break;
     }
 
@@ -64,47 +66,47 @@ function addSegmentPart() {
 
   if (skipStartSegment == skipSegmentDefault) {
     skipStartSegment = trackProgress;
+
+    Spicetify.showNotification("Starting creation of skip segment");
   }
   else {
     const data = Spicetify.Player.data || Spicetify.Queue;
     skipStopSegment = trackProgress;
 
-    if (data.track !== null && data.track?.uid !== null) {
-      addSegmentToStorage(data.track?.uid!);
+    if (data.track !== null && data.track?.uri !== null) {
+      addSegmentToStorage(data.track?.uri!, getArtistNameFromTrack(data.track), data.track?.metadata!.title!);
     }
 
-    Spicetify.showNotification("Skip segment from " + msToMinutesSecond(skipStartSegment) + " to " + msToMinutesSecond(trackProgress) + " saved");
+    Spicetify.showNotification("Skip segment from " + msToReadableTime(skipStartSegment) + " to " + msToReadableTime(trackProgress) + " saved");
 
     clearSkipPartSegment();
   }
 }
 
-function addSegmentToStorage(trackUID: string) {
-  const storage = Spicetify.LocalStorage.get(localStorageKey);
+function addSegmentToStorage(trackURI: string, artistName: string, songName: string) {
+  let parsedStorage: SkipSongPartStorage = getStoredData();
+  let parsedTrackData: SongData = parsedStorage[trackURI];
+  let newTrackData: SongSegment = { start: skipStartSegment, end: skipStopSegment };
 
-  let parsedStorage: SkipSongPartStorage = JSON.parse(storage!);
-  let parsedTrackData: SongSegments = parsedStorage[trackUID];
-  let newTrackData = {[skipStartSegment]: {start: skipStartSegment, end: skipStopSegment}};
-  
-  parsedStorage[trackUID] = {...parsedTrackData, ...newTrackData};
+  if (parsedTrackData === undefined) {
+    parsedTrackData = {
+      artist: artistName,
+      song: songName,
+      segments: [newTrackData]
+    }
+  }
+  else {
+    parsedTrackData.segments.push(newTrackData);
+  }
 
-  Spicetify.LocalStorage.set(localStorageKey, JSON.stringify(parsedStorage));
+  parsedStorage[trackURI] = parsedTrackData;
+
+  saveStoredData(parsedStorage);
 }
 
 function clearSkipPartSegment() {
   skipStartSegment = skipSegmentDefault;
   skipStopSegment = skipSegmentDefault;
-}
-
-function msToMinutesSecond(ms: number) {
-  const minutes = Math.floor(ms / 60000);
-  const seconds = ((ms % 60000) / 1000).toFixed(0);
-
-  return `${+minutes < 10 ? "0" : ""}${minutes}:${+seconds < 10 ? "0" : ""}${seconds}`
-};
-
-function sleep(ms: number) {
-  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 export default main;

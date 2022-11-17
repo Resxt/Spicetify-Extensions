@@ -1,5 +1,11 @@
 type SkipSongPartStorage = {
-    [key: string]: SongSegments
+    [key: string]: SongData
+}
+
+type SongData = {
+    artist: string,
+    song: string,
+    segments: SongSegment[]
 }
 
 type SongSegments = {
