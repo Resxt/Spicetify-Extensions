@@ -7,7 +7,7 @@ It allows you to define segments in a song you're currently listening to to alwa
 
 ## Why use this?
 
-Although it's made for a pretty specific use case, it can still be useful if there are songs that you listen to that have some part(s) you find bad/useless/annoying/empty etc.  
+It can be useful if there are songs that you listen to that have some part(s) you find bad/useless/annoying/empty etc.  
 Here are some use cases from my personal experience:
 
 - Songs with long dialogues ([example 1 from 00:00 to 00:55](https://open.spotify.com/track/7EsjkelQuoUlJXEw7SeVV4?si=17c1664358e24066) | [example 2 from 03:00 to 03:34](https://open.spotify.com/track/10uGdDVJHS0Pgwx1T2U4kH?si=6ec6f01dbdab4aab))
