@@ -3,7 +3,7 @@
 ![preview](https://raw.githubusercontent.com/Resxt/Spicetify-Extensions/main/skip-song-part/assets/preview.png)
 
 `skip-song-part` is a [Spicetify](https://spicetify.app/) extension that makes it possible to skip any part you don't want to hear in any song.  
-It allows you to define segments in a song you're currently listening to to permanently add skip this/these part(s) of this song whenever it's playing again.
+It allows you to define segments in a song you're currently listening to to always skip this/these part(s) of this song whenever it's playing again.
 
 ## Why use this?
 
