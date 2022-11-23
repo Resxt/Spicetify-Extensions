@@ -32,9 +32,22 @@ You can also simply search up my Github name to list all of my published extensi
 
 Go in the `dist` folder of the extension you want to download, click on the file then click on `Raw`.
 
+<details>
+  <summary>Image</summary>
+  
+  ![image](https://user-images.githubusercontent.com/55228336/203532286-5b39ddce-1786-4e11-a0fe-b04c866c67a8.png)
+  ![image](https://user-images.githubusercontent.com/55228336/203532319-c3d13954-2b86-418e-a493-ebb21c636b2b.png)
+</details>
+
 Right click anywhere and click on `Save page as` (or an equivalent).  
 
 Make sure to put `All` or `Any` for the file type and to add `.js` at the end of the file name.
+
+<details>
+  <summary>Image</summary>
+  
+  ![image](https://user-images.githubusercontent.com/55228336/203532444-7abb153c-b341-46ca-9d5c-6bd6a426befe.png)
+</details>
 
 ### Installing an extension manually
 
