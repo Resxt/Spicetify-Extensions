@@ -29,7 +29,8 @@ async function tryRemoveUnplayableSongs(elementURIs: string[]) {
 }
 
 function removeUnplayableSongs(playlistLink: string, songsToRemove: PlaylistSong[]) {
-  Spicetify.CosmosAsync.del(`https://api.spotify.com/v1/playlists/${playlistLink}/tracks`, { "tracks": songsToRemove })
+  splitSongsToRemove(songsToRemove).forEach(arrayElement => {
+    Spicetify.CosmosAsync.del(`https://api.spotify.com/v1/playlists/${playlistLink}/tracks`, { "tracks": arrayElement })
   .catch(error => {
     Spicetify.showNotification("Failed to remove unplayable songs. See console for more details");
     console.error(error);
@@ -42,6 +43,28 @@ function removeUnplayableSongs(playlistLink: string, songsToRemove: PlaylistSong
       Spicetify.showNotification("Successfully removed " + songsToRemove.length + " unplayable songs");
     }
   })
+  })
+}
+
+/*
+To avoid getting a "Payload too large" error we split the array into multiple arrays
+*/
+function splitSongsToRemove(songsToRemove: PlaylistSong[]) {
+  const payloadMaxSize = 100;
+
+  let songsToRemoveSplitted: [PlaylistSong[]] = [[]];
+
+  for (let index = 0; index < songsToRemove.length; index += payloadMaxSize) {
+    let endIndex = index + payloadMaxSize;
+    
+    if (endIndex > songsToRemove.length) {
+      endIndex = songsToRemove.length;
+    }
+
+    songsToRemoveSplitted.push(songsToRemove.slice(index, endIndex));
+  }
+
+  return songsToRemoveSplitted;
 }
 
 export default main;
