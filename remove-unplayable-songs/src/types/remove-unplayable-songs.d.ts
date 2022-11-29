@@ -9,9 +9,8 @@ type PlaylistSongData = {
 }
 
 type PlaylistPlaylistData = {
-    allows: {
-        insert: boolean,
-        remove: boolean
+    userCapabilities: {
+        canAdministratePermissions: boolean
     }
     link: string
 }

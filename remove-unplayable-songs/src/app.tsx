@@ -9,7 +9,7 @@ async function main() {
 async function tryRemoveUnplayableSongs(elementURIs: string[]) {
   const playlistData: PlaylistData = await Spicetify.CosmosAsync.get(`sp://core-playlist/v1/playlist/${elementURIs[0]}`);
 
-  if (!playlistData.playlist.allows.remove) {
+  if (!playlistData.playlist.userCapabilities.canAdministratePermissions) {
     Spicetify.showNotification("You are not allowed to remove songs in this playlist");
 
     return;
