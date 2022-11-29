@@ -1,6 +1,6 @@
 # remove-unplayable-songs
 
-![preview](assets/preview.png)
+![preview](https://raw.githubusercontent.com/Resxt/Spicetify-Extensions/main/remove-unplayable-songs/assets/preview.png)
 
 `remove-unplayable-songs` is a [Spicetify](https://spicetify.app/) extension that allows you to quickly remove every unplayable/greyed out songs in your playlist.
 
