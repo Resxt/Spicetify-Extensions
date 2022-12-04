@@ -1,3 +1,4 @@
 startup-page/dist/* linguist-vendored
 skip-song-part/dist/* linguist-vendored
 remove-unplayable-songs/dist/* linguist-vendored
+artist-discography-to-playlist/dist/* linguist-vendored
