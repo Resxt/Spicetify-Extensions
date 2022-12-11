@@ -6,7 +6,8 @@
 
 ## How to use it?
 
-Simply right click on one of your playlists and click on `Remove unplayable songs`
+To remove unplayable songs from a playlist, simply right click on one of your playlists and click on `Remove unplayable songs`.  
+To remove unplayable songs from your liked songs, right click on the `Liked Songs` button on your sidebar, the one you have by default,  then click on the button that appears in the popup.
 
 ## Notes
 
