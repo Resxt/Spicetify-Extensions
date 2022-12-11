@@ -15,7 +15,7 @@
     },
     {
       "name": "Remove unplayable songs",
-      "description": "Spicetify extension that allows you to remove every unplayable songs in your playlist",
+      "description": "Spicetify extension that allows you to remove unplayable songs in playlists",
       "preview": "remove-unplayable-songs/assets/preview.png",
       "main": "remove-unplayable-songs/dist/remove-unplayable-songs.js",
       "readme": "remove-unplayable-songs/README.md"
