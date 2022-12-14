@@ -1,21 +1,21 @@
 [
     {
       "name": "Startup page",
-      "description": "Spicetify extension that allows you to change the startup page",
+      "description": "Allows you to change the startup page",
       "preview": "startup-page/assets/preview.png",
       "main": "startup-page/dist/startup-page.js",
       "readme": "startup-page/README.md"
     },
     {
       "name": "Skip song part",
-      "description": "Spicetify extension that allows you to skip any part you don't want to hear in any song",
+      "description": "Allows you to skip any part(s) you don't want to hear in any song",
       "preview": "skip-song-part/assets/preview.png",
       "main": "skip-song-part/dist/skip-song-part.js",
       "readme": "skip-song-part/README.md"
     },
     {
       "name": "Remove unplayable songs",
-      "description": "Spicetify extension that allows you to remove unplayable songs in playlists",
+      "description": "Allows you to remove unplayable songs in your playlists",
       "preview": "remove-unplayable-songs/assets/preview.png",
       "main": "remove-unplayable-songs/dist/remove-unplayable-songs.js",
       "readme": "remove-unplayable-songs/README.md"
