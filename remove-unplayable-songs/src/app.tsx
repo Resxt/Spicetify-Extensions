@@ -5,7 +5,7 @@ async function main() {
     await new Promise(resolve => setTimeout(resolve, 100));
   }
   
-  new Spicetify.ContextMenu.Item("Remove unplayable songs", tryRemoveUnplayableSongs, Spicetify.URI.isPlaylistV1OrV2, "block").register();
+  new Spicetify.ContextMenu.Item("Remove unplayable songs", tryRemoveUnplayableSongs, (uri) => Spicetify.URI.isPlaylistV1OrV2(uri[0]), "block").register();
   initLikedSongsMenu();
 }
 
