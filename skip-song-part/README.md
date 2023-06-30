@@ -35,6 +35,16 @@ When listening to a song that contains the part(s) you want to skip, do the foll
 You can also click on the `Delete all segments` button at the bottom to delete every single segment from every song.  
 If you want to keep some segments, delete the ones you don't want one by one instead.
 
+## Backing up your data
+
+If you plan on reinstalling Spotify or reinstalling Windows you may want to backup the segments you created.  
+To do this you can follow these instructions:  
+
+- Click on your profile picture in the Spotify app
+- Click on `Skip song part menu`
+- Go at the very bottom of the modal that opens and click on `Import/Export`
+- Follow the instructions that appear on the new modal that just opened
+
 ## Notes
 
 For now this only works after you change to another song.  

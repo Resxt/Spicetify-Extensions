@@ -16,6 +16,10 @@ export function getStoredDataObject() {
     return Object.values(getStoredData());
 }
 
+export function saveStoredDataRaw(json: string) {
+    Spicetify.LocalStorage.set(localStorageKey, json);
+}
+
 export function saveStoredData(parsedStorage: SkipSongPartStorage) {
     Spicetify.LocalStorage.set(localStorageKey, JSON.stringify(parsedStorage));
 }
