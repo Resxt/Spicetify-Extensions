@@ -35,9 +35,10 @@ When listening to a song that contains the part(s) you want to skip, do the foll
 You can also click on the `Delete all segments` button at the bottom to delete every single segment from every song.  
 If you want to keep some segments, delete the ones you don't want one by one instead.
 
-## Backing up your data
+### Backing up your data
 
-If you plan on reinstalling Spotify or reinstalling Windows you may want to backup the segments you created.  
+Uninstalling the extension will keep your data and let you use your data again the next time you install the extension without having to do anything.  
+On the other hand, if you plan on uninstalling/reinstalling Spotify or reinstalling Windows you may want to backup the segments you created manually.  
 To do this you can follow these instructions:  
 
 - Click on your profile picture in the Spotify app
