@@ -7,7 +7,7 @@ async function main() {
 
   let queueButton = document.querySelector(`[aria-label="` + Spicetify.Platform.Translations["playback-control.queue"] + `"]`);
 
-  queueButton?.addEventListener("mousedown", onQueueIconRightClick)
+  queueButton?.addEventListener("contextmenu", onQueueIconRightClick)
 } 
 
 function onQueueIconRightClick() {
