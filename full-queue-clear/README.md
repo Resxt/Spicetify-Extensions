@@ -9,7 +9,7 @@ Essentially this a one click fresh start/reset for your queue.
 ## Why use this?
 
 I created this because I want to listen exactly what I want in the order that I want.  
-The way Spotify handles the queue with tracks coming from "context" (you clicking play on a playlist) and "queue" (you click on "add to queue") isn't ideal in my opinion.  
+The way Spotify handles the queue with tracks coming from "context" (you clicking play on a playlist) and "queue" (you clicking on "add to queue") isn't ideal in my opinion.  
 I would rather just clear up the queue and add the playlists/tracks I want and only listen to that without having my context playlist being mixed up with my actual queue.  
 
 This can also be useful if you're a design maniac who wants a clean bar when you're not listening to anything or for screenshots.
