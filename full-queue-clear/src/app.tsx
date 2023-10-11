@@ -32,7 +32,7 @@ async function fullQueueClear(keepCurrentSong: boolean, clearRegularQueue: boole
 
   if (keepCurrentSong) {
     let currentProgress = Spicetify.Player.getProgress();
-    let currentPlaybackId = Spicetify.Player.data.playback_id;
+    let currentPlaybackId = Spicetify.Player.data.playbackId;
     let shouldResume = Spicetify.Player.isPlaying();
     let currentVolume = Spicetify.Player.getVolume();
 
@@ -54,7 +54,7 @@ async function fullQueueClear(keepCurrentSong: boolean, clearRegularQueue: boole
 /* Play the same song we're already playing to get a new playback ID, which clears the context queue */
 function changePlaybackId(previousProgress: number, previousPlaybackId: string | undefined, shouldResume: boolean, previousVolume: number, callback: any) {
   if (Spicetify.Player.data.track) {
-    if (Spicetify.Player.data.playback_id != previousPlaybackId) {
+    if (Spicetify.Player.data.playbackId != previousPlaybackId) {
       if (!shouldResume) {
         Spicetify.Player.pause();
       }

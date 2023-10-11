@@ -39,7 +39,7 @@ declare namespace Spicetify {
             track: number;
         };
         track?: ProvidedTrack;
-        playback_id?: string;
+        playbackId?: string;
         playback_quality?: string;
         playback_speed?: number;
         position_as_of_timestamp: number;
