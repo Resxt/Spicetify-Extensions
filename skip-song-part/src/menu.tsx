@@ -12,6 +12,12 @@ const modalStyle = {
       margin-top: 2rem;
       margin-bottom: 2rem;
     }
+
+    #ssp-song-filter {
+      text-align: center;
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
     
     .ssp-song-div {
       display: flex;
@@ -84,7 +90,9 @@ async function openSegmentsModal() {
   const menuContainer = react.createElement("div", { className: "ssp-container" }, react.createElement("style", modalStyle),
     react.createElement("p", { id: "ssp-how-to-1" }, "Use ALT+S to add segments to skip"),
     react.createElement("p", { id: "ssp-how-to-2", className: `${isStoredDataEmpty() ? "d-none" : ""}` }, "Click on a song or a segment to delete it"),
-    react.createElement("hr", { id: "ssp-separator-1", color: getCssVariable("spice-text"), size: 1, className: `${isStoredDataEmpty() ? "d-none" : ""}` }),
+    react.createElement("hr", { id: "ssp-separator-1", color: getCssVariable("spice-text"), size: 1 }),
+    react.createElement("input", { id: "ssp-song-filter", type: "text", placeHolder: "Type to filter", autofocus: "true", className: `${isStoredDataEmpty() ? "d-none" : ""}`, onInput: onSongFilter }),
+    react.createElement("hr", { id: "ssp-separator-2", color: getCssVariable("spice-text"), size: 1, className: `${isStoredDataEmpty() ? "d-none" : ""}` }),
 
     // For each song in the storage create a div with the artist and song name in a child label. In that same div create a span with the segments times for each segments found for that song
     Object.entries(getStoredData()).map(([songKey, songData], index) => (
@@ -95,7 +103,7 @@ async function openSegmentsModal() {
         ))
       )
     )),
-    react.createElement("hr", { id: "ssp-separator-2", color: getCssVariable("spice-text"), size: 1, className: `${isStoredDataEmpty() ? "d-none" : ""}` }),
+    react.createElement("hr", { id: "ssp-separator-3", color: getCssVariable("spice-text"), size: 1, className: `${isStoredDataEmpty() ? "d-none" : ""}` }),
     react.createElement("button", { id: "ssp-delete-all", className: `${isStoredDataEmpty() ? "ssp-buttons d-none" : "ssp-buttons"}`, onClick: onDeleteAllClick }, "Delete all segments"),
     react.createElement("button", { id: "ssp-import-export", className: "ssp-buttons", onClick: openImportExportModal }, "Import/Export")
   )
@@ -118,7 +126,7 @@ async function openImportExportModal() {
     react.createElement("h2", { id: "ssp-how-to-title-4" }, "Exporting saved segments"),
     react.createElement("p", { id: "ssp-how-to-4" }, "Copy everything in the text area below in a text file on your PC"),
     react.createElement("hr", { id: "ssp-separator-3", color: getCssVariable("spice-text"), size: 1 }),
-    react.createElement("textarea", { id: "ssp-import-export-textarea", autofocus: "true" }, getStoredDataRaw()),
+    react.createElement("textarea", { id: "ssp-import-export-textarea", autofocus: "true" }, isStoredDataEmpty() ? "" : getStoredDataRaw()),
     react.createElement("hr", { id: "ssp-separator-4", color: getCssVariable("spice-text"), size: 1 }),
     react.createElement("button", { id: "ssp-import-export-save", className: "ssp-buttons", onClick: onImportExportSaveClick }, "Save")
   )
@@ -132,6 +140,25 @@ async function openImportExportModal() {
     content: menuContainer,
     isLarge: true,
   });
+}
+
+function onSongFilter(element: any) {
+  const filteredText = element.target.value.toLowerCase();
+  const songDivs = document.querySelectorAll('.ssp-song-div') as NodeListOf<HTMLElement>;
+
+  songDivs.forEach((div) => {
+    const label = div.getElementsByTagName('label')[0];
+
+    if (label.textContent !== null) {
+      const itemText = label.textContent.toLowerCase();
+
+      if (itemText.includes(filteredText)) {
+        div.style.display = '';
+      } else {
+        div.style.display = 'none';
+      }
+    }
+  })
 }
 
 function onSongClick(element: any) {
