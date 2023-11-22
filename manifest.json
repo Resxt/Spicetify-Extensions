@@ -26,5 +26,12 @@
       "preview": "full-queue-clear/assets/preview.png",
       "main": "full-queue-clear/dist/full-queue-clear.js",
       "readme": "full-queue-clear/README.md"
+    },
+    {
+      "name": "Discography to playlist",
+      "description": "Allows you to create a playlist with the entire discography of an artist",
+      "preview": "discography-to-playlist/assets/preview.png",
+      "main": "discography-to-playlist/dist/discography-to-playlist.js",
+      "readme": "discography-to-playlist/README.md"
     }
 ]

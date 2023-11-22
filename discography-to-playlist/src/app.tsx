@@ -1,4 +1,4 @@
-import { encodeImgFromUrl, getArtistData, getUserId } from "./utils";
+import { encodeImgFromUrl, getArtistDiscography, getArtist, getUserId, splitArray } from "./utils";
 
 async function main() {
   while (!Spicetify?.showNotification) {
@@ -10,17 +10,26 @@ async function main() {
 
 async function createPlaylistFromDiscography(uris: string[]) {
   const artistId = Spicetify.URI.fromString(uris[0]).id!;
-  const artistData = await getArtistData(artistId);
+  const artistData = await getArtist(artistId);
   const createPlaylistBody: CreatePlaylistBody = {
     name: "Discography of " + artistData.name,
-    description: "Playlist with the entire discography of " + artistData.name + ". Created with discography-to-playlist at <date>",
-    public: false
+    description: "Playlist with the entire discography of " + artistData.name + ". Created with discography-to-playlist"
   };
 
-  Spicetify.showNotification("Creating playlist with the discography of " + artistData.name);
+  Spicetify.showNotification("Creating your playlist..", false, 5000);
 
   const createPlaylistResponse = await createPlaylist(createPlaylistBody);
-  updatePlaylistImage(createPlaylistResponse.id, artistData.images[0].url);
+  await updatePlaylistImage(createPlaylistResponse.id, artistData.images[0].url);
+
+  const tracks = await getArtistDiscography(artistId, "album,single,appears_on,compilation");
+
+  // splitting the tracks array by chunks of 100 tracks to respect the API's limit per request
+  // https://developer.spotify.com/documentation/web-api/reference/add-tracks-to-playlist
+  splitArray(tracks, 100).forEach(async tracksChunk => {
+    await Spicetify.CosmosAsync.post(`https://api.spotify.com/v1/playlists/${createPlaylistResponse.id}/tracks`, { "uris": tracksChunk });
+  });
+
+  Spicetify.showNotification("Playlist " + createPlaylistBody.name + " <br>successfully created with " + tracks.length + " tracks", false, 5000);
 }
 
 async function createPlaylist(body: CreatePlaylistBody): Promise<CreatePlaylistResponse> {
