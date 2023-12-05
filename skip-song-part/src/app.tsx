@@ -33,8 +33,8 @@ function monitorTrackChange() {
     const parsedStorage: SkipSongPartStorage = getStoredData();
 
     // If the current track is found in the local storage then monitor the track to skip the segments
-    if (parsedStorage[data.track?.uri!] !== undefined) {
-      monitorSegmentSkip(data.track?.uri!, parsedStorage[data.track?.uri!].segments);
+    if (parsedStorage[data.item?.uri!] !== undefined) {
+      monitorSegmentSkip(data.item?.uri!, parsedStorage[data.item?.uri!].segments);
     }
   });
 }
@@ -44,7 +44,7 @@ async function monitorSegmentSkip(trackURI: string, skips: SongSegments) {
     const data = Spicetify.Player.data || Spicetify.Queue;
 
     // If we're not listening to the monitored song anymore then stop monitoring for segment skips
-    if (data.track?.uri! !== trackURI) {
+    if (data.item?.uri! !== trackURI) {
       break;
     }
 
@@ -73,8 +73,8 @@ function addSegmentPart() {
     const data = Spicetify.Player.data || Spicetify.Queue;
     skipStopSegment = trackProgress;
 
-    if (data.track !== null && data.track?.uri !== null) {
-      addSegmentToStorage(data.track?.uri!, getArtistNameFromTrack(data.track), data.track?.metadata!.title!);
+    if (data.item !== null && data.item?.uri !== null) {
+      addSegmentToStorage(data.item?.uri!, getArtistNameFromTrack(data.item), data.item?.metadata!.title!);
     }
 
     Spicetify.showNotification("Skip segment from " + msToReadableTime(skipStartSegment) + " to " + msToReadableTime(trackProgress) + " saved");
