@@ -26,9 +26,11 @@ async function tryRemoveUnplayableSongs(elementURIs: string[]) {
     }
   })
 
-  const playlistLink: string = Spicetify.URI.fromString(playlistData.playlist.link).getBase62Id();
+  const playlistLink = Spicetify.URI.fromString(playlistData.playlist.link).id;
 
-  removeUnplayableSongs(playlistLink, songsToRemove);
+  if (playlistLink !== undefined) {
+    removeUnplayableSongs(playlistLink, songsToRemove);
+  }
 }
 
 function removeUnplayableSongs(playlistLink: string, songsToRemove: PlaylistSong[]) {
