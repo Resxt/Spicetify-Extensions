@@ -7,7 +7,7 @@
 ## How to use it?
 
 To remove unplayable songs from a playlist, simply right click on one of your playlists and click on `Remove unplayable songs`.  
-To remove unplayable songs from your liked songs, right click on the `Liked Songs` button on your sidebar, the one you have by default,  then click on the button that appears in the popup.
+To remove unplayable songs from your liked songs, click on your profile picture in the Spotify app then click on the `Remove unplayable liked songs` button.
 
 ## Notes
 
