@@ -4,9 +4,12 @@ async function main() {
   while (!Spicetify?.showNotification) {
     await new Promise(resolve => setTimeout(resolve, 100));
   }
+
+  new Spicetify.Menu.Item("Remove unplayable liked songs", true, () => {
+    removeUnplayableLikedSongs();
+  }, "block").register();
   
   new Spicetify.ContextMenu.Item("Remove unplayable songs", tryRemoveUnplayableSongs, (uri) => Spicetify.URI.isPlaylistV1OrV2(uri[0]), "block").register();
-  initLikedSongsMenu();
 }
 
 async function tryRemoveUnplayableSongs(elementURIs: string[]) {
@@ -135,63 +138,6 @@ function splitLikedSongsToRemove(songsToRemove: string[]) {
   }
 
   return songsToRemoveSplitted;
-}
-
-async function initLikedSongsMenu() {
-  let likedSongsElement = document.querySelector('.main-collectionLinkButton-collectionLinkButton[href="/collection/tracks"]');
-
-  while (!likedSongsElement) {
-    await new Promise(resolve => setTimeout(resolve, 100));
-    likedSongsElement = document.querySelector('.main-collectionLinkButton-collectionLinkButton[href="/collection/tracks"]');
-  }
-
-  likedSongsElement.addEventListener('contextmenu', () => {
-    openModal();
-  })
-}
-
-async function openModal() {
-  const menuContainer = react.createElement("div", { className: "rus-container" }, react.createElement("style", {
-    dangerouslySetInnerHTML: {
-      __html: `
-      .rus-container {
-        text-align: center;
-      }
-      
-      .rus-buttons {
-        -webkit-tap-highlight-color: transparent;
-        font-weight: 700;
-        font-family: var(--font-family,CircularSp,CircularSp-Arab,CircularSp-Hebr,CircularSp-Cyrl,CircularSp-Grek,CircularSp-Deva,var(--fallback-fonts,sans-serif));
-        background-color: transparent;
-        border-radius: 500px;
-        transition-duration: 33ms;
-        transition-property: background-color, border-color, color, box-shadow, filter, transform;
-        padding-inline: 15px;
-        border: 1px solid #727272;
-        color: var(--spice-text);
-        min-block-size: 32px;
-      }
-      
-      .rus-buttons:hover {
-        transform: scale(1.04);
-        border-color: var(--spice-text);
-      }
-      `,
-    },
-  }),
-    react.createElement("button", { id: "rus-remove-all-unplayble-songs", className: "rus-buttons", onClick: onRemoveAllUnplayableLikedSongsClick }, "Remove all unplayable songs in my liked songs")
-  )
-
-  Spicetify.PopupModal.display({
-    title: "Remove unplayable songs",
-    content: menuContainer,
-    isLarge: false,
-  });
-}
-
-function onRemoveAllUnplayableLikedSongsClick() {
-  removeUnplayableLikedSongs();
-  Spicetify.PopupModal.hide();
 }
 
 export default main;
