@@ -5,7 +5,7 @@ async function main() {
     await new Promise(resolve => setTimeout(resolve, 100));
   }
 
-  new Spicetify.Menu.Item("Remove unplayable liked songs", true, () => {
+  new Spicetify.Menu.Item("Remove unplayable liked songs", false, () => {
     removeUnplayableLikedSongs();
   }, "block").register();
   
