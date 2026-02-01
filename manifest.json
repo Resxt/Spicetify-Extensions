@@ -14,24 +14,10 @@
       "readme": "skip-song-part/README.md"
     },
     {
-      "name": "Remove unplayable songs",
-      "description": "Allows you to remove unplayable songs in your playlists",
-      "preview": "remove-unplayable-songs/assets/preview.png",
-      "main": "remove-unplayable-songs/dist/remove-unplayable-songs.js",
-      "readme": "remove-unplayable-songs/README.md"
-    },
-    {
       "name": "Full queue clear",
       "description": "Allows you to clear the queue the way you want",
       "preview": "full-queue-clear/assets/preview.png",
       "main": "full-queue-clear/dist/full-queue-clear.js",
       "readme": "full-queue-clear/README.md"
-    },
-    {
-      "name": "Discography to playlist",
-      "description": "Allows you to create a playlist with the entire discography of an artist",
-      "preview": "discography-to-playlist/assets/preview.png",
-      "main": "discography-to-playlist/dist/discography-to-playlist.js",
-      "readme": "discography-to-playlist/README.md"
     }
 ]
