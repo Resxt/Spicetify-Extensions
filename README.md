@@ -8,6 +8,14 @@ This is a collection of [Spicetify](https://spicetify.app/) extensions I created
 
 Huge thanks to the Spicetify team for making this possible and to everyone who helped me on Discord.
 
+## Deprecated/archived extensions
+
+⚠️Some extensions in this repository are not maintained anymore, because I have no will to keep fixing them over and over due to Spotify's API changes and/or another extension does the same thing already
+Therefore I have removed them from the marketplace, they're only kept in this repository for archiving purposes
+Here's the list of deprecated extensions:
+- Discography to playlist: massive Spotify API changes that required a lot of fixing -> as an alternative I recommend using [Sort Play](http://github.com/hoeci/sort-play/) which does the same (and more!)
+- Remove unplayable songs: broken due to Spotify's API changes, no will to fix it
+
 ## How do I download an extension?
 
 You have two ways to get an extension: through the marketplace or manually.  
