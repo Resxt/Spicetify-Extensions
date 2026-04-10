@@ -19,5 +19,12 @@
       "preview": "full-queue-clear/assets/preview.png",
       "main": "full-queue-clear/dist/full-queue-clear.js",
       "readme": "full-queue-clear/README.md"
+    },
+    {
+      "name": "Image opener",
+      "description": "Allows you to open various images directly in your browser",
+      "preview": "image-opener/assets/preview.png",
+      "main": "image-opener/dist/image-opener.js",
+      "readme": "image-opener/README.md"
     }
 ]
