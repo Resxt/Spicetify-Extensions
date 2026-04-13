@@ -70,15 +70,28 @@ async function openArtistAvatarImage(uri: string) {
   window.open(artistVisuals.avatarImage.sources[0].url);
 }
 
+/**
+ * This function checks for 2 different potential routes for `headerImage`  
+ * to ensure it works with both `v1` and `v2` version of the API
+ * 
+ * Old Spotify (such as 2023) uses `v1` version  
+ * In `v2` (current API) it seems that for whatever reason they moved the banner variable outside of the visuals object
+ */
 async function openArtistBannerImage(uri: string) {
+  const artistData = await getArtistData(uri);
   const artistVisuals = await getArtistVisuals(uri);
 
-  if (artistVisuals.headerImage == null) {
+  let url = null;
+
+  if (artistData.data.artistUnion.headerImage != null) {
+    url = artistData.data.artistUnion.headerImage.data.sources[0].url;
+  } else if (artistVisuals.headerImage != null) {
+    url = artistVisuals.headerImage.sources[0].url;
+  } else {
     throw logError("Artist does not have a banner image");
   }
-  else {
-    window.open(artistVisuals.headerImage.sources[0].url);
-  }
+
+  window.open(url);
 }
 
 async function openArtistGalleryImages(uri: string) {
