@@ -174,7 +174,8 @@ async function getAlbumData(uri: string) {
 
 async function getPlaylistData(uri: string) {
   return getData("fetchPlaylist", {
-    uri: uri
+    uri: uri,
+    enableWatchFeedEntrypoint: false
   });
 }
 
