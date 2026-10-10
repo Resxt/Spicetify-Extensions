@@ -1,3 +1,5 @@
+import {getPlaylistMetadata, normalizeImageSources} from "./playlist-metadata";
+
 async function main() {
   while (!Spicetify?.showNotification) {
     await new Promise(resolve => setTimeout(resolve, 100));
@@ -59,7 +61,8 @@ function onAlbumMenuItemClicked(uris: string[]) {
 }
 
 function onPlaylistMenuItemClicked(uris: string[]) {
-  openPlaylistCoverImage(uris[0]);
+  // The error is already reported through the extension's notification helper.
+  void openPlaylistCoverImage(uris[0]).catch(() => {});
 }
 
 
@@ -121,9 +124,14 @@ async function openAlbumCoverImage(uri: string) {
 }
 
 async function openPlaylistCoverImage(uri: string) {
-  const playlistData = await getPlaylistData(uri);
-
-  window.open(playlistData.data.playlistV2.images.items[0].sources[0].url);
+  try {
+    const metadata = await getPlaylistMetadata(uri);
+    const image = normalizeImageSources(metadata.images)[0];
+    if (!image) throw new Error("Playlist does not have a cover image");
+    window.open(image.url);
+  } catch (error) {
+    throw logError(error instanceof Error ? error.message : "Failed to retrieve playlist data");
+  }
 }
 
 
@@ -172,12 +180,6 @@ async function getAlbumData(uri: string) {
   });
 }
 
-async function getPlaylistData(uri: string) {
-  return getData("fetchPlaylist", {
-    uri: uri,
-    enableWatchFeedEntrypoint: false
-  });
-}
 
 
 
